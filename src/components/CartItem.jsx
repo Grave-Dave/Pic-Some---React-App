@@ -1,10 +1,12 @@
 import React, {useContext, useState} from "react";
 import { Context } from "./userContext";
 import PropTypes from "prop-types"
+import useHover from '../hooks/useHover'
 
 function CartItem({item}) {
 
-    const [hovered, setHovered] = useState(false)
+    // const [hovered, setHovered] = useState(false)
+    const [hovered, ref] = useHover()
     const {removeFromChart} = useContext(Context)
 
    function trashIcon(){
@@ -19,8 +21,7 @@ function CartItem({item}) {
             <i 
             onClick = {()=>removeFromChart(item)}
             className= {trashIcon()}
-            onMouseEnter={() => setHovered(true)}
-			onMouseLeave={() => setHovered(false)}            
+            ref = {ref}          
             ></i>
             <img src={item.url} width="300px" />
             <p>$5.99</p>
